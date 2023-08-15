@@ -1,6 +1,7 @@
 import numpy as np
 import librosa
 import os, argparse, pickle
+os.environ['PYOPENGL_PLATFORM'] = 'osmesa'
 from SelfTalk import SelfTalk
 from transformers import Wav2Vec2Processor
 import torch
@@ -11,8 +12,6 @@ from subprocess import call
 import pyrender
 from psbody.mesh import Mesh
 import trimesh
-
-os.environ['PYOPENGL_PLATFORM'] = 'egl'  # egl
 
 
 @torch.no_grad()
@@ -46,7 +45,7 @@ def test_model(args):
     audio_feature = torch.FloatTensor(audio_feature).to(device=args.device)
 
     start = time.time()
-    prediction, lip_features, logits = model.predict(audio_feature, template)
+    prediction, _, _ = model.predict(audio_feature, template)
     end = time.time()
     print("Model predict time: ", end - start)
     prediction = prediction.squeeze()

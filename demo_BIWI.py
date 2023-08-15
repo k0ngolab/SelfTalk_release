@@ -1,6 +1,7 @@
 import numpy as np
 import librosa
 import os, argparse, pickle
+os.environ['PYOPENGL_PLATFORM'] = 'osmesa'
 from SelfTalk import SelfTalk
 from transformers import Wav2Vec2Processor
 import torch
@@ -11,8 +12,6 @@ from subprocess import call
 import pyrender
 from psbody.mesh import Mesh
 import trimesh
-
-os.environ['PYOPENGL_PLATFORM'] = 'osmesa'  # egl
 
 
 @torch.no_grad()
